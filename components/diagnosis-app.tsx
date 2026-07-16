@@ -176,16 +176,19 @@ export function DiagnosisApp() {
             <p>{result.description}</p>
           </div>
 
-          <div className="result-card">
+          <div className={`result-card${result.isOverflow ? " is-overflow" : ""}`}>
             <div className="score-row">
-              <span>政治傾き度</span>
+              <div>
+                <span>政治傾き度</span>
+                {result.isOverflow && <b className="overflow-badge">⚡ 測定限界突破</b>}
+              </div>
               <strong>{result.score > 0 ? "+" : ""}{result.score}<small> / 100</small></strong>
             </div>
-            <div className="result-spectrum" role="img" aria-label={`左マイナス100から右プラス100のうち${result.score}`}>
+            <div className="result-spectrum" data-overflow={result.overflowSide} role="img" aria-label={`表示上は左マイナス100から右プラス100、診断結果は${result.score}`}>
               <div className="result-marker" style={{ left: `${result.position}%` }}><span>{result.score > 0 ? "+" : ""}{result.score}</span></div>
             </div>
             <div className="spectrum-labels"><span>LEFT −100</span><span>中道 0</span><span>RIGHT +100</span></div>
-            <p className="result-note">この結果は、30の回答を単純な左右軸に換算したものです。政治的な考え方のすべてを表すものではありません。</p>
+            <p className="result-note">100点は表示上の目安です。回答が一方向へ強く揃うと100点を超えることがあります。この結果は、30の回答を単純な左右軸に換算したもので、政治的な考え方のすべてを表すものではありません。</p>
           </div>
 
           <div className="result-actions">

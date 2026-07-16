@@ -168,11 +168,17 @@ button { color: inherit; }
 .result-heading em { color: var(--coral); font-style: normal; }
 .result-heading > p:last-child { margin: 28px 0 0; max-width: 510px; color: var(--muted); font-size: 18px; line-height: 1.9; }
 .result-card { position: relative; padding: 42px; border-radius: 28px; background: rgba(255,253,248,.78); border: 1px solid rgba(255,255,255,.9); box-shadow: 0 25px 60px rgba(66,47,27,.08); }
+.result-card.is-overflow { border-color: rgba(241,95,74,.4); box-shadow: 0 25px 65px rgba(241,95,74,.17), 0 0 0 5px rgba(77,143,232,.06); }
 .score-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 58px; }
-.score-row > span { font-size: 15px; font-weight: 750; }
+.score-row > div { display: grid; gap: 10px; }
+.score-row > div > span { font-size: 15px; font-weight: 750; }
 .score-row strong { color: var(--coral); font-size: 64px; line-height: 1; letter-spacing: -.05em; }
 .score-row small { color: #989087; font-size: 17px; letter-spacing: 0; }
+.overflow-badge { width: max-content; padding: 7px 11px; border-radius: 999px; color: #fff; background: linear-gradient(90deg, var(--coral-dark), var(--blue)); font-size: 11px; letter-spacing: .05em; box-shadow: 0 5px 16px rgba(241,95,74,.2); animation: overflow-pulse 1.8s ease-in-out infinite; }
 .result-spectrum { height: 64px; }
+.result-spectrum[data-overflow="left"]::before, .result-spectrum[data-overflow="right"]::after { content: ""; position: absolute; z-index: -1; top: 4px; width: 44px; height: 56px; border-radius: 50%; filter: blur(13px); opacity: .85; }
+.result-spectrum[data-overflow="left"]::before { left: -31px; background: var(--coral); }
+.result-spectrum[data-overflow="right"]::after { right: -31px; background: var(--blue); }
 .result-marker { position: absolute; top: 50%; width: 44px; height: 82px; border-radius: 22px; background: #fff; box-shadow: 0 7px 18px rgba(31,36,38,.25); transform: translate(-50%,-50%); transition: left .7s cubic-bezier(.2,.8,.2,1); }
 .result-marker::after { content: ""; position: absolute; left: 50%; top: 18px; width: 3px; height: 46px; border-radius: 4px; background: var(--ink); transform: translateX(-50%); }
 .result-marker span { position: absolute; left: 50%; top: -33px; transform: translateX(-50%); color: var(--ink); font-size: 13px; font-weight: 800; }
@@ -240,4 +246,5 @@ button { color: inherit; }
   .hero-copy, .spectrum-art, .quiz-topline, .question-card, .result-heading, .result-card { animation: rise-in .48s ease both; }
   .spectrum-art, .question-card:nth-child(even), .result-card { animation-delay: .08s; }
   @keyframes rise-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes overflow-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 }
